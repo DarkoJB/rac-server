@@ -16,6 +16,18 @@ router.get("/", async (request, response) => {
   }
 });
 
+// GET user by id
+router.get("/:id", async (request, response) => {
+  try {
+    const user = await User.findById(request.params.id).select("-password"); // Exclude password from the response
+    response.status(200).json(user);
+  } catch (err) {
+    const message = `GET:500 Failed to GET users: ${err.message}`;
+    console.error(message);
+    response.status(500).json({ message });
+  }
+});
+
 // POST a new user
 router.post(
   "/",
@@ -30,12 +42,6 @@ router.post(
     body("role").isIn(["renter", "owner"]).withMessage("Invalid role"),
   ],
   async (request, response) => {
-    // const user = new User({
-    //   name: request.body.name,
-    //   email: request.body.email,
-    //   password: request.body.password,
-    // });
-
     const { username, password, role, email } = request.body;
 
     try {

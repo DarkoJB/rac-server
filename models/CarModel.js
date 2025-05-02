@@ -10,11 +10,4 @@ const carSchema = new mongoose.Schema({
   thumbnail: String,
 });
 
-// carSchema.pre("save", function (next) {
-//   if (this.isModified("images") && this.images.length > 0) {
-//     this.thumbnail = this.images[0]; // Set the thumbnail to the first image in the array
-//   }
-//   next();
-// });
-
 module.exports = mongoose.model("Car", carSchema);

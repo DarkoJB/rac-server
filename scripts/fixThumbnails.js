@@ -14,7 +14,7 @@ async function updateThumbnails() {
   for (const car of cars) {
     car.thumbnail = car.images[0];
     await car.save();
-    console.log(`Updated thumbnail for ${car.model}`);
+    console.info(`Updated thumbnail for ${car.model}`);
   }
 
   process.exit(0);
