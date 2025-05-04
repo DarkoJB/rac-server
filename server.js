@@ -5,7 +5,23 @@ require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors()); // Allow React to connect
+
+// CORS Configuration
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",")
+  : [];
+
+const corsOptionsDelegate = function (req, callback) {
+  let corsOptions;
+  if (allowedOrigins.includes(req.header("Origin"))) {
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in CORS response
+  } else {
+    corsOptions = { origin: false }; // disable CORS for this request
+  }
+  callback(null, corsOptions);
+};
+
+app.use(cors(corsOptionsDelegate)); // Allow React to connect
 app.use(express.json()); // Parse JSON requests
 app.use("/uploads", express.static("uploads"));
 
