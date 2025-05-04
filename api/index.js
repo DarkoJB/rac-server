@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
 require("dotenv").config();
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -32,15 +35,17 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 /** MODELS */
-require("./models/UserModel"); // This initializes the User model
-require("./models/CarModel");
-require("./models/BookingModel");
+require("../models/UserModel"); // This initializes the User model
+require("../models/CarModel");
+require("../models/BookingModel");
 
 /** ROUTES */
-const carRoutes = require("./routes/carsRoute");
-const userRoutes = require("./routes/usersRoute");
+const carRoutes = require("../routes/carsRoute");
+const userRoutes = require("../routes/usersRoute");
 
 app.use("/api/cars", carRoutes); // Car routes
 app.use("/api/users", userRoutes); // User routes
 
 app.listen(PORT, () => console.info(`Server running on port ${PORT}`));
+
+module.exports = serverless(app);
