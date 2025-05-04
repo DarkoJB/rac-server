@@ -44,4 +44,4 @@ const userRoutes = require("../routes/usersRoute");
 app.use("/api/cars", carRoutes); // Car routes
 app.use("/api/users", userRoutes); // User routes
 
-module.exports = { handler: serverless(app), app };
+module.exports = serverless(app);
