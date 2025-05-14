@@ -45,5 +45,4 @@ const userRoutes = require("./routes/usersRoute");
 app.use("/api/cars", carRoutes); // Car routes
 app.use("/api/users", userRoutes); // User routes
 
-// app.listen(PORT, () => console.info(`Server running on port ${PORT}`));
-module.exports = serverless(app);
+app.listen(PORT, () => console.info(`Server running on port ${PORT}`));
