@@ -1,3 +1,5 @@
+/**
+ * 
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -33,12 +35,10 @@ mongoose
   .then(() => console.info("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
-/** MODELS */
 require("../models/UserModel"); // This initializes the User model
 require("../models/CarModel");
 require("../models/BookingModel");
 
-/** ROUTES */
 const carRoutes = require("../routes/carsRoute");
 const userRoutes = require("../routes/usersRoute");
 
@@ -48,3 +48,7 @@ app.use("/api/users", userRoutes); // User routes
 app.listen(PORT, () => console.info(`Server running on port ${PORT}`));
 
 module.exports = app;
+*/
+const serverless = require("serverless-http");
+const app = require("../server"); // reuse the same app
+module.exports = serverless(app);
