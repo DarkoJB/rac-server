@@ -51,4 +51,4 @@ module.exports = app;
 */
 const serverless = require("serverless-http");
 const app = require("../server"); // reuse the same app
-module.exports = serverless(app);
+module.exports = app;
