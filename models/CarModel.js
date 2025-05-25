@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
 
-const imageSchema = new mongoose.Schema(
-  {
-    data: { type: Buffer, required: true },
-    contentType: { type: String, required: true },
-  },
-  { _id: false }
-); // optional: prevents _id creation on subdocs
+const imageSchema = new mongoose.Schema({
+  data: { type: Buffer, required: true },
+  contentType: { type: String, required: true },
+});
 
 const carSchema = new mongoose.Schema({
   model: { type: String, required: true },
